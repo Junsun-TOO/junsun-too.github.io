@@ -1,0 +1,291 @@
+<template>
+  <div class="shopcart">
+      <div class="content">
+          <div class="content-left">
+              <div class="logo-wra">
+                  <div class="loge" :class="{'highlight':totalCount>0}">
+                      <i class="el-icon-shopping-cart-1 " :class="{'highlight':totalCount>0}"></i>
+                  </div>
+                  <div class="num" v-show="totalCount>0">{{totalCount}}</div>
+              </div>
+              <div class="price" :class="{'highlight':totalPrice>0}">￥{{totalPrice}}元</div>
+              <div class="desc">另需配送费￥{{deliveryPrice}}元</div>
+          </div>
+          <div class="content-right">
+              <div class="pay" :class="payClass">
+                  {{payDesc}}
+              </div>
+          </div>
+      </div>
+     
+            <!--购物车小球-->
+       <div class="ball-container">
+           <div v-for="(ball,index) in balls" :key="index">
+           <transition name="drop" @before-enter="beforeEnter"
+            @enter="enter"
+            @after-enter="afterEnter">
+               <div class="ball" v-show="ball.show" > <!--外层盒子-->
+                   <div class="inner inner-hook"></div> <!--内层盒子-->
+               </div>
+               
+           </transition>
+       </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+
+    //  属性props向下传递数据给子组件,子组件通过 事件events 给父组件发送消息。
+    props: {
+        selectFoods: {
+            type: Array,
+            default() {
+                return [
+                    {
+                        price: 15,
+                        count: 1
+                    }
+                ]
+            }
+        },
+        deliveryPrice: {
+            type : Number,
+            default: 0
+        },
+        minPrice: {
+            type : Number,
+            default: 0
+        }
+    },
+    data(){
+        return {
+            balls: [
+                {
+                    show: false
+                },
+                {
+                    show: false
+                },
+                {
+                    show: false
+                },
+                {
+                    show: false
+                },
+                {
+                    show: false
+                }
+            ],
+            dropBalls: []
+        }
+    },
+    computed: {
+        totalPrice() {
+            let total = 0
+            this.selectFoods.forEach((food)=>{
+                total += food.price * food.count
+
+            }) 
+            return total
+                
+            
+        },
+        totalCount() {
+            let count = 0
+            this.selectFoods.forEach((food)=>{
+                count += food.count
+
+            }) 
+            return count
+        },
+        payDesc() {
+            if (this.totalPrice === 0) {
+                return `￥${this.minPrice}元起送`
+            }else if (this.totalPrice<this.minPrice) {
+                let diff  = this.minPrice - this.totalPrice
+                return `还差￥${diff}元起送`
+            }else{
+                return `去结算`
+            }
+        },
+        payClass(){
+            if (this.totalPrice < this.minPrice) {
+                return `not-enough`
+                
+            }else{
+                return `enough`
+            }
+        }
+    },
+    methods: {
+        drop(el) {
+            //console.log(el)
+            for (let i = 0; i < this.balls.length; i++) {
+                let ball = this.balls[i]
+                if (!ball.show) {
+                    ball.show = true
+                    ball.el = el
+                    this.dropBalls.push(ball)
+                    return
+                }
+                
+            }
+        },
+    
+   
+    beforeEnter(el) {
+                let count = this.balls.length
+                while (count--) {
+                    let ball = this.balls[count]
+                    if (ball.show) {
+                        let rect = ball.el.getBoundingClientRect()
+                        let x = rect.left - 32
+                        let y = -(window.innerHeight - rect.top -22)
+                        el.style.display = ''
+                        el.style.webkitTransform = `translate3d(0,${y}px,0)`
+                        el.style.transform = `translate3d(0,${y}px,0)`
+                        let inner = el.getElementsByClassName('inner-hook')[0]
+                        inner.style.webkitTransform = `translate3d(${x}px,0,0)`
+                        inner.style.transform = `translate3d(${x}px,0,0)`
+                    }
+                    
+                }
+            },
+            enter(el) {
+                /* eslint-disable no-unused-vars */
+                // 触发浏览器重绘
+                let rf = el.offsetHeight
+                this.$nextTick(()=>{
+                        
+                        el.style.webkitTransform = 'translate3d(0,0,0)'
+                        el.style.transform = 'translate3d(0,0,0)'
+                        let inner = el.getElementsByClassName('inner-hook')[0]
+                        inner.style.webkitTransform = 'translate3d(0,0,0)'
+                        inner.style.transform = 'translate3d(0,0,0)'
+                        //el.addEventListener('transitionend', done) // Vue为了知道过渡的完成，必须设置相应的事件监听器。它可以是transitionend或 animationendel.addEventListener('transitionend', done) // Vue为了知道过渡的完成，必须设置相应的事件监听器。它可以是transitionend或 animationend
+                })
+            },
+            afterEnter(el) {        
+                let ball = this.dropBalls.shift()
+                if (ball) {
+                    ball.show =  false
+                    el.style.display = 'none'
+                }
+            }
+        }
+}
+
+</script>
+
+<style lang='stylus' rel="stylesheet/stylus">
+    .shopcart
+        position: fixed
+        left: 0 
+        bottom : 0
+        z-index : 50
+        width : 100%
+        height : 48px
+        background-color: #000
+        .content
+            display : flex
+            background-color #141d27
+            font-size : 0
+            color : rgba(255,255,255,0.4)
+            .content-left
+                flex: 1
+                .logo-wra
+                    display : inline-block
+                    position: relative
+                    top: -10px
+                    margin: 0 12px
+                    padding: 6px
+                    width : 56px
+                    height : 56px
+                    box-sizing :border-box
+                    vertical-align : top
+                    border-radius : 50%
+                    background: #141d27
+                    .num
+                        position : absolute
+                        top : 0
+                        right: 0
+                        width : 24px
+                        height : 16px
+                        line-height : 16px
+                        text-align : center
+                        border-radius : 16px
+                        font-size : 9px
+                        font-weight : 700
+                        color: #ffffff
+                        background-color: rgb(240,20,20)
+                        box-shadow:  0 4px 8px 0 rgba(0,0,0,0.4)
+
+                    .loge
+                        text-align : center
+                        width : 100%
+                        height : 100%
+                        border-radius : 50%
+                        background-color: #2b343c
+                        &.highlight
+                            background : rgb(0,160,220)
+                        .el-icon-shopping-cart-1 
+                            font-size : 24px
+                            color : #80858a
+                            line-height : 44px
+                            font-weight : 700 
+                            &.highlight
+                                color : #fff
+                .price
+                    display : inline-block
+                    vertical-align : top
+                    margin-top : 12px
+                    line-height : 24px
+                    padding-right : 12px
+                    box-sizing : border-box
+                    border-right : 1px solid rgba(255,255,255,0.1)
+                    font-size : 16px
+                    font-weight : 700 
+                    &.highlight
+                        color : #fff
+                .desc
+                    display : inline-block
+                    vertical-align : top
+                    line-height : 24px
+                    margin : 12px 0 0 12px
+                    
+                    font-size : 10px
+            .content-right
+                flex : 0 0 105px
+                width : 105px
+                .pay
+                    height : 48px
+                    line-height : 48px
+                    text-align : center
+                    font-size : 12px
+                    font-weight : 700 
+                    &.not-enough
+                         background : #2b333b
+                    &.enough
+                         background : #00b43c
+                         color: #fff
+        .ball-container
+            .ball
+                position fixed
+                left: 32px
+                bottom: 22px
+                z-index: 200             
+                &.drop-enter-active
+                    transition all 1s cubic-bezier(0.49, -0.29, 0.75, 0.41)
+                .inner
+                    width 16px
+                    height 16px
+                    border-radius 50%
+                    background rgb(0,160,220)
+                    transition: all 0.4s 
+
+
+
+
+</style>
