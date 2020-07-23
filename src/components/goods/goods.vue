@@ -3,8 +3,12 @@
     <div class="menu-wra" ref="menuScroll">
       <!-- 如果index等于currentIndex,就为这个li添加一个current类，改变左侧导航栏的背景颜色-->
      <ul>
-       <li v-for="(item,index) in goods" :key="item.id" class="menu-item" @click="selectMenu(index)">
-         <span class="text border-1px"><span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>{{item.name}}
+       <li v-for="(item,index) in goods"
+        class="menu-item "
+         :class="{'current': currentIndex === index}" 
+         @click="selectMenu(index)">
+         <span class="text border-1px" >
+           <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>{{item.name}}
          </span>
          </li>
      </ul>
@@ -13,8 +17,8 @@
         <ul style="margin: 0;padding: 0;">
           <li v-for="(item,index) in goods" class="food-list food-list-hook" style="list-style: none;">
             <h1 class="title">{{item.name}}</h1>
-            <ul style="margin: 0;padding: 0;">
-              <li v-for="(food,index) in item.foods" class="food-item border-1px" :class="{'current': currentIndex === index}" >
+            <ul>
+              <li v-for="(food,index) in item.foods" class="food-item border-1px">
                 <div class="icon">
                   <img width="57" height="57" :src="food.icon">
                 </div>
@@ -93,14 +97,14 @@ export default {
       _menuScroll() {
         let scrollDOM = this.$refs.menuScroll;
         let menuScroll = new BScroll(scrollDOM,{
-            scrollY: true,
+            
             click: true
         })
       },
       _foodScroll() {
         var scrollDOM = this.$refs.foodScroll
         this.foodScroll = new BScroll(scrollDOM,{
-            scrollY: true,
+          
            click: true,
            probeType: 3
         })
@@ -125,10 +129,13 @@ export default {
         if(response.errno === ERR_OK){
           this.goods = response.data
           console.log(this.goods);
-          this.$nextTick(function(){
+          this.$nextTick(()=>{
+            this.getHeight();
             this._menuScroll();
             this._foodScroll();
           })
+        }else{
+          console.log('no data')
         }
      });
    },
@@ -137,6 +144,7 @@ export default {
      cartcontrol
    },
    computed: {
+     // 比较scroll 和 右边分栏高度，返回index
      currentIndex() {
        for (let i = 0; i < this.listHeight.length; i++) {
          console.log(this.scrollY)
@@ -175,53 +183,54 @@ export default {
     position: absolute
     top: 174px
     bottom: 46px
-    width: 100%
-    margin-top: 8px;
+    width: 100%   
     overflow: hidden
     .menu-wra
-      flex: 0 0 80px
-      width: 80px
-      // height: 100%     
-      background-color: #f3f5f7
-      ul
-        margin: 0 
-        padding: 0
+      flex: 0 0 80px;
+      width: 80px;
+      background: #f3f5f7;
       .menu-item // li
-        //list-style: none
-        text-align: center
-        display: table  // 使用table做垂直居中 
-        height:54px
-        width: 56px
-        padding: 12px 12px
-        line-height: 14px
-        
-        .icon // 图片
-          display: inline-block
-          width: 12px
-          height: 12px 
-          margin-righ: 2px
-          vertical-align: top /* 设置对齐方式 */
-          background-size: 12px 12px
-          background-repeat: no-repeat
-          &.decrease
-            bg-image('decrease_3')
-          &.discount
-            bg-image('discount_3')
-          &.guarantee
-            bg-image('guarantee_3')
-          &.invoice
-            bg-image('invoice_3')
-          &.special
-            bg-image('special_3')
+        display: table;
+        height: 54px;
+        width: 56px;
+        padding:0 12px;
+        line-height: 14px;
+        &.current
+          position:relative;
+          z-index:10;
+          margin-top:-1px;
+          background:#fff;
+          .text
+            border-none()
+            font-weight:bold;
         .text // 文字
           display: table-cell
           font-size: 12px  
           width: 56px
           font-weight: 200
-          text-align: middle 
-          border-1px(rgba(7, 17, 27, 0.1))
-          &:last-child
+          vertical-align: middle;
+          border-1px(rgba(0,0,0,0))
+          &.last-child
             margin-bottom: 0px
+          .icon // 图片
+              display: inline-block
+              width: 12px
+              height: 12px 
+              margin-righ: 2px
+              vertical-align: top /* 设置对齐方式 */
+              background-size: 12px 12px
+              background-repeat: no-repeat
+              &.decrease
+                bg-image('decrease_3')
+              &.discount
+                bg-image('discount_3')
+              &.guarantee
+                bg-image('guarantee_3')
+              &.invoice
+                bg-image('invoice_3')
+              &.special
+                bg-image('special_3')
+      
     .foods-wra
       flex: 1
       .title
@@ -259,7 +268,7 @@ export default {
           .desc
             margin-bottom: 8px
           .extra
-            &count
+            .count
               margin-right: 12px
           .price
             font-weight: 700
