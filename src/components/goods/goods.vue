@@ -6,7 +6,7 @@
 				<li v-for="(item,index) in goods" class="menu-item" 
 					:class="{'current':currenIndex===index}"
 					@click="selectMenu(index,$event)">
-					<span class="text border-b-1px">
+					<span class="text border-1px">
           	            <span v-show="item.type>0" class="icon" 
           	            	:class="classMap[item.type]">
     	  	            </span>{{item.name}}
@@ -20,7 +20,7 @@
 					<h1 class="title">{{item.name}}</h1>
 					<ul>
 						<li v-for="food in item.foods" 
-							class="food-item border-b-1px"
+							class="food-item border-1px"
 							@click="selectFood(food,$event)">
 							<div class="icon">
 								<img width="57" height="57" :src="food.icon" />
@@ -50,7 +50,7 @@
 	    	ref="shopcart"
 	    >
 	    </shopcart>
-	    <!-- <food :food="selectedFood" ref="food" v-on:cart-add="addToCart"></food> -->
+	    <food :food="selectedFood" ref="food" v-on:cart-add="addToCart"></food>
 	</div>
 </template>
 
@@ -173,7 +173,7 @@
 				    return;
 			    }
 				this.selectedFood=food;
-				// this.$refs.food.show();
+				this.$refs.food.show();
 			}
 		},
 		components:{
