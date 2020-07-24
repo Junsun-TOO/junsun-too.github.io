@@ -5,7 +5,7 @@
 				<div class="image-header">
 					<img class="img" :src="food.image">
 					<div class="back" @click="hide">
-						<i class="el-icon-arrow-left"></i>
+						<i class="icon-arrow_lift"></i>
 					</div>
 				</div>
 				<div class="content">
@@ -207,7 +207,7 @@ export default{
     		position:absolute;
     		top:10px;
     		left:0;
-    		.el-icon-arrow-left{
+    		.icon-arrow_lift{
     			display:block;
     			padding:10px;
     			font-size: 20px;

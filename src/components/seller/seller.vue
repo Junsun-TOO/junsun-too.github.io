@@ -29,7 +29,7 @@
   				</li>
   			</ul>
   		  <div class="favorite" @click="toggleFavorite">
-  		  	<span class="el-icon-upload" :class="{'active':favorite}"></span>
+  		  	<span class="icon-favorite" :class="{'active':favorite}"></span>
   		  	<span class="text">{{favoriteText}}</span>
   		  </div>
   		</div>
@@ -222,7 +222,7 @@ export default{
 			right:11px;
 			top:18px;
 			text-align:center;
-			.el-icon-upload{
+			.icon-favorite{
 				margin-bottom: 4px;
 				display:block;
 				line-height: 24px;

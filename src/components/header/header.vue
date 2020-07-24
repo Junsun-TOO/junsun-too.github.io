@@ -22,12 +22,12 @@
         </div>
       <div v-if="seller.supports" class="support-count" @click="showDetail">
           <span class="count">{{seller.supports.length}}个</span>
-          <i class="el-icon-arrow-right"></i>
+          <i class="icon-keyboard_arrow_right"></i>
       </div>
     </div>
     <div class="bulletin-wra" @click="showDetail"> 
       <span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span>
-      <i class="el-icon-arrow-right"></i>
+      <i class="icon-keyboard_arrow_right"></i>
     </div>
     <div class="backgroud">
       <img  width="100%" height="100%" :src="seller.avatar" alt="">
@@ -63,7 +63,7 @@
          </div>
       </div>
       <div class="detail-close" @click="hideDetail">
-        <i class="el-icon-close"></i>
+        <i class="icon-close"></i>
       </div>
     </div>
     </transition>
@@ -182,7 +182,7 @@ export default {
         text-align: center
         .count
           font-size: 10px
-        .el-icon-arrow-right
+        .icon-keyboard_arrow_right
            line-height: 12px
            font-size: 10px
   .bulletin-wra
@@ -206,7 +206,7 @@ export default {
       .bulletin-text
         font-size: 10px
         margin: 0 4px
-      .el-icon-arrow-right
+      .icon-keyboard_arrow_right
         position: absolute
         font-size: 10px
         right: 12px

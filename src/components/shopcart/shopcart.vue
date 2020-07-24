@@ -4,7 +4,7 @@
           <div class="content-left">
               <div class="logo-wra">
                   <div class="loge" :class="{'highlight':totalCount>0}">
-                      <i class="el-icon-shopping-cart-1 " :class="{'highlight':totalCount>0}"></i>
+                      <i class="icon-shopping_cart " :class="{'highlight':totalCount>0}"></i>
                   </div>
                   <div class="num" v-show="totalCount>0">{{totalCount}}</div>
               </div>
@@ -295,7 +295,7 @@ export default {
                         background-color: #2b343c
                         &.highlight
                             background : rgb(0,160,220)
-                        .el-icon-shopping-cart-1 
+                        .icon-shopping_cart 
                             font-size : 24px
                             color : #80858a
                             line-height : 44px

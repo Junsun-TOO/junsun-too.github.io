@@ -9,8 +9,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+
+
 const express =require('express')
 const app  = express()
+
+
 var appData = require('../data.json') //加载本地数据
 var seller = appData.seller
 var goods = appData.goods
@@ -33,7 +37,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   // these devServer options should be customized in /config/index.js
   devServer: {
     before (app) {
-      app.get('/api/seller', function (req, res) {
+      apiRouters.get('/api/seller', function (req, res) {
         // 服务端收到请求后返回给客户端一个json数据
         res.json({
           // 当我们数据正常时，我们通过传递errno字符为0表示数据正常
@@ -42,18 +46,19 @@ const devWebpackConfig = merge(baseWebpackConfig, {
           data: seller
         })
       })
-      app.get('/api/goods', function (req, res) {
+      apiRouters.get('/api/goods', function (req, res) {
         res.json({
           errno: 0,
           data: goods
         })
       })
-      app.get('/api/ratings', function (rea, res) {
+      apiRouters.get('/api/ratings', function (rea, res) {
         res.json({
           errno: 0,
           data: ratings
         })
       })
+      app.use('/api', apiRouters)
     },
     clientLogLevel: 'warning',
     historyApiFallback: {

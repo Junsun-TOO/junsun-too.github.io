@@ -34,14 +34,18 @@
 								<div class="price">
 									<span class="new">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">{{food.oldPrice}}</span>
 								</div>
-							    <div class="cartcontrol-wrapper">
+							    
+							</div>
+							<div class="cartcontrol-wrapper">
 							    	<cartcontrol :food="food" v-on:cart-add="addToCart"></cartcontrol>
 							    </div>
-							</div>
 						</li>
+						
 					</ul>
+					
 				</li>
 			</ul>
+			
 		</div>
 	    <shopcart 
 	    	:select-foods="selectFoods"

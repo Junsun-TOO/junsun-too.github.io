@@ -8,7 +8,7 @@ import VueResource from 'vue-resource'
 import goods from './components/goods/goods'
 import seller from './components/seller/seller'
 import ratings from './components/ratings/ratings'		
-// import './common/css/index.scss'
+import './common/stylus/icon.styl'
 
 import './common/stylus/index.styl'
 
