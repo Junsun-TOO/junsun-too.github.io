@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>baidu</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    a {
+        color: #000;
+        text-decoration: none;
+    }
+
+    /* top */
+    .topWrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .topWrapper .left ul {
+        position: relative;
+    }
+
+    .topWrapper .left ul .moreli:hover .more {
+        display: block;
+    }
+
+    .topWrapper .left ul li {
+        float: left;
+        padding: 20px;
+        
+    }
+
+    .topWrapper .left ul .moreli .more {
+        width: 200px;
+        position: absolute;
+        top: 44px;
+        left: 300px;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        display: none;
+
+    }
+
+    .topWrapper .left ul .moreli .more .item {
+        width: 50px;
+        display: flex;
+        height: 65px;
+        float: left;
+        font-size: 12px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .topWrapper .left ul .moreli .more img {
+        width: 42px;
+        height: 42px;
+    }
+
+    .topWrapper .right ul li {
+        float: left;
+        padding: 20px;
+    }
+    .topWrapper .right ul .and .shezhi{
+        position: absolute;
+        top: 44px;
+        right: 80px;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        display: none;
+    }
+    .topWrapper .right ul .and:hover .shezhi{
+        display: block;
+    }
+    .topWrapper .right ul .and .shezhi .item {
+        padding: 5px;
+    }
+
+    /* content */
+    .contentWrapper .imageWrapper {
+        margin: 0 auto;
+        margin-top: 60px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .contentWrapper .imageWrapper{
+        width: 750px;
+    }
+    .contentWrapper .inputWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .contentWrapper .imageWrapper .imageGif {
+
+        width: 210px;
+        height: 98px;
+    }
+
+    .contentWrapper .inputWrapper .input {
+
+        width: 548px;
+        height: 40px;
+        outline: none;
+        border-radius: 10px 0 0 10px;
+        border: 2px solid rgb(97, 122, 231);
+        border-right: none;
+    }
+
+    .contentWrapper .inputWrapper .btn {
+        width: 108px;
+        height: 44px;
+        background-color: #4e6ef2;
+        color: #fff;
+        outline: none;
+        border: none;
+        border-radius: 0 10px 10px 0;
+    }
+</style>
+
+<body>
+    <div class="topWrapper">
+        <div class="left">
+            <ul>
+                <li><a href="#">新闻</a></li>
+                <li><a href="#">hao123</a></li>
+                <li><a href="#">地图</a></li>
+                <li><a href="#">视频</a></li>
+                <li><a href="#">贴吧</a></li>
+                <li><a href="#">学术</a></li>
+                <li class="moreli"><a href="#">更多</a>
+                    <div class="more">
+                        <div class="item">
+                            <img src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/topnav/tupian@2x-482fc011fc.png"
+                                alt="">
+                            <div>图片</div>
+                        </div>
+                        <div class="item">
+                            <img src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/topnav/tupian@2x-482fc011fc.png"
+                                alt="">
+                            <div>图片</div>
+                        </div>
+                        <div class="item">
+                            <img src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/topnav/tupian@2x-482fc011fc.png"
+                                alt="">
+                            <div>图片</div>
+                        </div>
+                        <div class="item">
+                            <img src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/topnav/tupian@2x-482fc011fc.png"
+                                alt="">
+                            <div>图片</div>
+                        </div>
+                        <div class="item">
+                            <img src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/topnav/tupian@2x-482fc011fc.png"
+                                alt="">
+                            <div>图片</div>
+                        </div>
+                        <div class="item">
+                            <img src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/topnav/tupian@2x-482fc011fc.png"
+                                alt="">
+                            <div>图片</div>
+                        </div>
+                        <div class="item">
+                            <img src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/topnav/tupian@2x-482fc011fc.png"
+                                alt="">
+                            <div>图片</div>
+                        </div>
+                        <div class="item">
+                            <img src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/topnav/tupian@2x-482fc011fc.png"
+                                alt="">
+                            <div>图片</div>
+                        </div>
+                        
+                    </div>
+                </li>
+                
+            </ul>
+        </div>
+        <div class="right">
+            <ul>
+                <li><a href="#" style="color:red">高考加油</a></li>
+                <li class="and"><a href="#">设置</a>
+                    <div class="shezhi">
+                        <div class="item">
+                            搜索设置
+                            
+                        </div>
+                        <div class="item">
+                            高级搜索
+                            
+                        </div>
+                        <div class="item">
+                            关闭预测
+                            
+                        </div>
+                        <div class="item">
+                            隐私设置
+                            
+                        </div>
+                        <div class="item">
+                            关闭热榜
+                            
+                        </div>
+                    </div>
+                </li>
+                <li><a href="#" style="background-color: #4e6ef2;color: #fff;padding: 5px;border-radius: 10px;">登录</a></li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="contentWrapper">
+        <div class="imageWrapper">
+            <div class="image">
+                <img src="https://www.baidu.com/img/dong_66cae51456b9983a890610875e89183c.gif" alt="" class="imageGif">
+            </div>
+            
+            <div class="inputWrapper">
+                <input type="text" class="input" id="input">
+                <button class="btn" onclick="huoqu()">百度一下</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<script>
+    function huoqu(){   
+         var a = $('input').val();
+         console.log(a);
+    }
+    
+  
+
+</script>
+</html>
